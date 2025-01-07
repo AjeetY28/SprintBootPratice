@@ -3,10 +3,11 @@ package com.introductionToSpringBoot.IntroductionToSpringBoot;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-
+@Scope("singleton")
 public class Apple {
     void eatApple()
     {
@@ -23,7 +24,6 @@ public class Apple {
     @PreDestroy
     void callThisBeforeDestroy()
     {
-        System.out.println("Destory the bean");
+        System.out.println("Destroy the bean");
     }
-
 }
