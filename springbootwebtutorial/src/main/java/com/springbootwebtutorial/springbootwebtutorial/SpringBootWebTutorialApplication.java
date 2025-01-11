@@ -14,7 +14,6 @@ public class SpringBootWebTutorialApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("creating only project structure");
-		System.out.println("creating only project structure");
-		System.out.println("creating only project structure");
+
 	}
 }
