@@ -31,4 +31,19 @@ public class EmployeeController {
     {
         return "Hi age "+age+" "+sortBy;
     }
+
+    @PostMapping   //use when we're Creating the resource
+//    public String createNewEmployee()
+    public EmployeeDTO createNewEmployee(@RequestBody EmployeeDTO inputEmployee)
+    {
+        inputEmployee.setId(100L);
+        return inputEmployee;  //in postman http://localhost:8080/employee  url use and write in body and JSON format {"name" :"Ram", "email" : "ram@gmail.com","age" :23  }
+//        return "hello for post"; for line no 36 or 35
+    }
+
+    @PutMapping //when we're updating the hole  resource
+    public String updateEmployeeId()
+    {
+        return "Hello from put";
+    }
 }
