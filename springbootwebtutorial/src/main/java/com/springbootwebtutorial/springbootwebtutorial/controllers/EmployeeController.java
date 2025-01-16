@@ -3,6 +3,7 @@ package com.springbootwebtutorial.springbootwebtutorial.controllers;
 import com.springbootwebtutorial.springbootwebtutorial.dto.EmployeeDTO;
 import com.springbootwebtutorial.springbootwebtutorial.entities.EmployeeEntity;
 import com.springbootwebtutorial.springbootwebtutorial.repositories.EmployeeRepository;
+import com.springbootwebtutorial.springbootwebtutorial.services.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -17,20 +18,25 @@ public class EmployeeController {
 //    {
 //        return "This is my Secret Message";
 //    }
-    private final EmployeeRepository employeeRepository;
+   private EmployeeService employeeService;
 
-    public EmployeeController(EmployeeRepository employeeRepository)
-    {
-        this.employeeRepository=employeeRepository;
-    }
+   public EmployeeController(EmployeeService employeeService)
+   {
+       this.employeeService=employeeService;
+   }
+
+
+
+
+
 //    @GetMapping("/employee/{employeeId}")  //when not use RequestMapping
      @GetMapping("/{employeeId}") //using RequestMapping
 //    public EmployeeDTO getEmployeeById(@PathVariable Long employeeId)//when the both employeeId variable name same for mapping and here
-    public EmployeeEntity getEmployeeById(@PathVariable(name="employeeId") Long id)//when the both employeeId variable not name same for mapping and here
+    public EmployeeDTO getEmployeeById(@PathVariable(name="employeeId") Long id)//when the both employeeId variable not name same for mapping and here
 
     {
 //        return new EmployeeDTO(id,"Ajeet","ajeet@gmail.com",25, LocalDate.of(2025,1,12),true);
-        return employeeRepository.findById(id).orElse(null);
+        return employeeService.getEmployeeById(id);
     }
 
 //    @GetMapping("/employee")  //When Not using RequestMapping
@@ -40,7 +46,7 @@ public class EmployeeController {
                                                 @RequestParam(required = false) String sortBy)
     {
 //        return "Hi age "+age+" "+sortBy;
-        return employeeRepository.findAll();
+        return employeeService.findAll();
     }
 
     @PostMapping   //use when we're Creating the resource
@@ -50,7 +56,7 @@ public class EmployeeController {
 //        inputEmployee.setId(100L);
 //        return inputEmployee;  //in postman http://localhost:8080/employee  url use and write in body and JSON format {"name" :"Ram", "email" : "ram@gmail.com","age" :23  }
 //        return "hello for post"; for line no 36 or 35
-        return employeeRepository.save(inputEmployee);
+        return employeeService.save(inputEmployee);
     }
 
     @PutMapping //when we're updating the hole  resource
