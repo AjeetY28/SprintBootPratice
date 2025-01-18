@@ -42,7 +42,7 @@ public class EmployeeController {
 //    @GetMapping("/employee")  //When Not using RequestMapping
     @GetMapping //When Using RequestMapping
 //    public String getAllEmployees(@RequestParam(required = false) Integer age, //if variable name change
-    public List<EmployeeEntity> getAllEmployees(@RequestParam(required = false,name="inputAge") Integer age, //inputAge will write on web Url
+    public List<EmployeeDTO> getAllEmployees(@RequestParam(required = false,name="inputAge") Integer age, //inputAge will write on web Url
                                                 @RequestParam(required = false) String sortBy)
     {
 //        return "Hi age "+age+" "+sortBy;
@@ -51,12 +51,12 @@ public class EmployeeController {
 
     @PostMapping   //use when we're Creating the resource
 //    public String createNewEmployee()
-    public EmployeeEntity createNewEmployee(@RequestBody EmployeeEntity inputEmployee)
+    public EmployeeDTO createNewEmployee(@RequestBody EmployeeDTO inputEmployee)
     {
 //        inputEmployee.setId(100L);
 //        return inputEmployee;  //in postman http://localhost:8080/employee  url use and write in body and JSON format {"name" :"Ram", "email" : "ram@gmail.com","age" :23  }
 //        return "hello for post"; for line no 36 or 35
-        return employeeService.save(inputEmployee);
+        return employeeService.createNewEmployee(inputEmployee);
     }
 
     @PutMapping //when we're updating the hole  resource
