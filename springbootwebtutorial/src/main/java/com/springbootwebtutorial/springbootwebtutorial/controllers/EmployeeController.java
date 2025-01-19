@@ -4,6 +4,7 @@ import com.springbootwebtutorial.springbootwebtutorial.dto.EmployeeDTO;
 import com.springbootwebtutorial.springbootwebtutorial.entities.EmployeeEntity;
 import com.springbootwebtutorial.springbootwebtutorial.repositories.EmployeeRepository;
 import com.springbootwebtutorial.springbootwebtutorial.services.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +56,7 @@ public class EmployeeController {
 
     @PostMapping   //use when we're Creating the resource
 //    public String createNewEmployee()
-    public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody EmployeeDTO inputEmployee)
+    public ResponseEntity<EmployeeDTO> createNewEmployee(@RequestBody @Valid EmployeeDTO inputEmployee)
     {
 //        inputEmployee.setId(100L);
 //        return inputEmployee;  //in postman http://localhost:8080/employee  url use and write in body and JSON format {"name" :"Ram", "email" : "ram@gmail.com","age" :23  }
