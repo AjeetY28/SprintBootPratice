@@ -44,11 +44,6 @@ public class EmployeeController {
                .map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1))
                .orElseThrow(()->new NoSuchElementException("Employee not found"));
     }
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<String> handleEmployeeNotFound(NoSuchElementException exception)
-    {
-        return new ResponseEntity<>("Employee not found",HttpStatus.NOT_FOUND);
-    }
 
 
 
