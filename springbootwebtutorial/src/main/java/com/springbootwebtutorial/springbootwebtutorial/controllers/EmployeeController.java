@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -41,8 +42,15 @@ public class EmployeeController {
         Optional<EmployeeDTO> employeeDTO=employeeService.getEmployeeById(id);
        return employeeDTO
                .map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1))
-               .orElse(ResponseEntity.notFound().build());
+               .orElseThrow(()->new NoSuchElementException("Employee not found"));
     }
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<String> handleEmployeeNotFound(NoSuchElementException exception)
+    {
+        return new ResponseEntity<>("Employee not found",HttpStatus.NOT_FOUND);
+    }
+
+
 
 //    @GetMapping("/employee")  //When Not using RequestMapping
     @GetMapping //When Using RequestMapping
@@ -67,7 +75,7 @@ public class EmployeeController {
 
 
     @PutMapping(path = "/{employeeId}") //when we're updating the hole  resource
-    public ResponseEntity<EmployeeDTO> updateEmployeeId(@RequestBody EmployeeDTO employeeDTO,@PathVariable Long employeeId)
+    public ResponseEntity<EmployeeDTO> updateEmployeeId(@RequestBody @Valid EmployeeDTO employeeDTO,@PathVariable Long employeeId)
     {
         return ResponseEntity.ok(employeeService.updateEmployeeById(employeeId,employeeDTO));
     }
