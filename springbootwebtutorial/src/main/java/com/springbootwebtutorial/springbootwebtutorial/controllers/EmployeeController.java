@@ -2,6 +2,7 @@ package com.springbootwebtutorial.springbootwebtutorial.controllers;
 
 import com.springbootwebtutorial.springbootwebtutorial.dto.EmployeeDTO;
 import com.springbootwebtutorial.springbootwebtutorial.entities.EmployeeEntity;
+import com.springbootwebtutorial.springbootwebtutorial.exceptions.ResourceNotFoundException;
 import com.springbootwebtutorial.springbootwebtutorial.repositories.EmployeeRepository;
 import com.springbootwebtutorial.springbootwebtutorial.services.EmployeeService;
 import jakarta.validation.Valid;
@@ -42,7 +43,7 @@ public class EmployeeController {
         Optional<EmployeeDTO> employeeDTO=employeeService.getEmployeeById(id);
        return employeeDTO
                .map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1))
-               .orElseThrow(()->new NoSuchElementException("Employee not found"));
+               .orElseThrow(()->new ResourceNotFoundException("Employee not found with id: "+id));
     }
 
 
