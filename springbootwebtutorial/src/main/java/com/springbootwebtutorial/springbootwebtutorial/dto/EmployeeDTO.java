@@ -47,7 +47,7 @@ public class EmployeeDTO {
     @PastOrPresent(message = "Date of joining in Employee be in future")
     private LocalDate dateOfJoining;
 
-    @AssertTrue(message = "Employee should be active")
+    @AssertTrue(message = "Employee should be active") //when use that time input should be true another wise give error
     @JsonProperty("isActive")
     private Boolean isActive;
 
