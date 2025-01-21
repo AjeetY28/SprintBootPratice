@@ -2,6 +2,7 @@ package com.springbootwebtutorial.springbootwebtutorial.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.springbootwebtutorial.springbootwebtutorial.annotations.EmployeeRoleValidation;
+import com.springbootwebtutorial.springbootwebtutorial.annotations.PrimeNoValidation;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -49,6 +50,7 @@ public class EmployeeDTO {
     @AssertTrue(message = "Employee should be active")
     @JsonProperty("isActive")
     private Boolean isActive;
+
 
 
 }
