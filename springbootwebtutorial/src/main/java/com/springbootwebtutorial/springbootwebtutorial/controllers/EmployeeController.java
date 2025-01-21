@@ -1,20 +1,15 @@
 package com.springbootwebtutorial.springbootwebtutorial.controllers;
 
 import com.springbootwebtutorial.springbootwebtutorial.dto.EmployeeDTO;
-import com.springbootwebtutorial.springbootwebtutorial.entities.EmployeeEntity;
 import com.springbootwebtutorial.springbootwebtutorial.exceptions.ResourceNotFoundException;
-import com.springbootwebtutorial.springbootwebtutorial.repositories.EmployeeRepository;
 import com.springbootwebtutorial.springbootwebtutorial.services.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
