@@ -7,8 +7,8 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class DepartmentDTO {
@@ -18,10 +18,4 @@ public class DepartmentDTO {
     private Boolean isActive;
     private LocalDate createdAt;
 
-    public DepartmentDTO(Long id, String name, boolean isActive, LocalDate createdDate) {
-        this.id = id;
-        this.title = name;
-        this.isActive = isActive;
-        this.createdAt = createdDate;
-    }
 }
