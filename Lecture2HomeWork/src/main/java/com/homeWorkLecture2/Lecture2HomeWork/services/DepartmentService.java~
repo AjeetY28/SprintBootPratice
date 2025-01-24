@@ -25,7 +25,7 @@ public class DepartmentService {
        return departmentRepository.findById(id).map(departmentEntity -> modelMapper.map(departmentEntity, DepartmentDTO.class)).orElse(null);
     }
 
-    public List<DepartmentDTO> getAllDepartment() {
+    public List<DepartmentEntity> getAllDepartment() {
         List<DepartmentEntity> departmentEntities = departmentRepository.findAll();
         return departmentEntities.stream().map(departmentEntity -> modelMapper
                         .map(departmentEntity, DepartmentDTO.class))
