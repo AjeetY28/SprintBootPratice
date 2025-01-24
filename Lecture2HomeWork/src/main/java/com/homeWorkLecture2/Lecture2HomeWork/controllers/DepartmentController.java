@@ -34,15 +34,21 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public DepartmentEntity createNewDepartment(@RequestBody DepartmentEntity inputDepartment)
+    public DepartmentDTO createNewDepartment(@RequestBody DepartmentDTO inputDepartment)
     {
-         return departmentRepository.save(inputDepartment);
+         return departmentService.createNewDepartment(inputDepartment);
     }
 
-//    @PutMapping("/{departmentId}")
-//    public DepartmentEntity updateDepartmentById(@PathVariable(name="departmentId") Long id, @RequestBody DepartmentEntity inputDepartment){
-//
-//    }
+    @PutMapping("/{departmentId}")
+    public DepartmentDTO updateDepartmentById(@PathVariable(name="departmentId") Long id, @RequestBody DepartmentDTO departmentDTO){
+        return departmentService.updateDepartmentById(id,departmentDTO);
+    }
 
+
+    @DeleteMapping("/{departmentId}")
+    public boolean deleteDepartmentById(@PathVariable(name="departmentId") Long id,DepartmentDTO departmentDTO)
+    {
+        return departmentService.deleteDepartmentById(id);
+    }
 
 }
