@@ -14,41 +14,34 @@ import java.util.List;
 @RequestMapping(path = "/department")
 public class DepartmentController {
 
-    public final DepartmentService departmentService;
+   private final DepartmentService departmentService;
 
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 
-
     @GetMapping("/{departmentId}")
-    public DepartmentDTO getDepartmentById(@PathVariable(name="departmentId") Long id)
-    {
-
+    public DepartmentDTO getDepartmentById(@PathVariable(value = "departmentId") Long id) {
         return departmentService.getDepartmentById(id);
     }
     @GetMapping
-    public List<DepartmentDTO> getAllDepartments()
+    public List<DepartmentDTO> getAllDepartment()
     {
         return departmentService.getAllDepartment();
     }
 
     @PostMapping
-    public DepartmentDTO createNewDepartment(@RequestBody DepartmentDTO inputDepartment)
-    {
-         return departmentService.createNewDepartment(inputDepartment);
+    public DepartmentDTO createDepartment(@RequestBody DepartmentDTO departmentDTO) {
+        return departmentService.createDepartment(departmentDTO);
     }
-
     @PutMapping("/{departmentId}")
-    public DepartmentDTO updateDepartmentById(@PathVariable(name="departmentId") Long id, @RequestBody DepartmentDTO departmentDTO){
-        return departmentService.updateDepartmentById(id,departmentDTO);
+    public DepartmentDTO updateDepartment(@RequestBody DepartmentDTO departmentDTO,@PathVariable(value = "departmentId") Long id)
+    {
+        return departmentService.updateDepartmentById(departmentDTO ,id);
     }
-
 
     @DeleteMapping("/{departmentId}")
-    public boolean deleteDepartmentById(@PathVariable(name="departmentId") Long id,DepartmentDTO departmentDTO)
-    {
+    public String deleteDepartmentById(@PathVariable(value = "departmentId") Long id) {
         return departmentService.deleteDepartmentById(id);
     }
-
 }

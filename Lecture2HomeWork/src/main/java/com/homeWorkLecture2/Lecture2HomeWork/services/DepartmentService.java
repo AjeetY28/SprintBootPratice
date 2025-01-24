@@ -12,50 +12,51 @@ import java.util.stream.Collectors;
 
 @Service
 public class DepartmentService {
-    public final DepartmentRepository departmentRepository;
-    public final ModelMapper modelMapper;
+    private final DepartmentRepository departmentRepository;
+    private final ModelMapper modalMapper;
 
-    public DepartmentService(DepartmentRepository departmentRepository,ModelMapper modelMapper) {
+    public DepartmentService(DepartmentRepository departmentRepository, ModelMapper modalMapper) {
         this.departmentRepository = departmentRepository;
-        this.modelMapper=modelMapper;
+        this.modalMapper = modalMapper;
     }
 
-
+    //Get department by id
     public DepartmentDTO getDepartmentById(Long id) {
-       return departmentRepository.findById(id).map(departmentEntity -> modelMapper.map(departmentEntity, DepartmentDTO.class)).orElse(null);
+        DepartmentEntity departmentEntity = departmentRepository.findById(id).orElse(null);
+        return modalMapper.map(departmentEntity, DepartmentDTO.class);
     }
 
-
+    //Get all departments
     public List<DepartmentDTO> getAllDepartment() {
-        List<DepartmentEntity> departmentEntities = departmentRepository.findAll();
-        return departmentEntities.stream().map(departmentEntity -> modelMapper
-                        .map(departmentEntity, DepartmentDTO.class))
-                        .collect(Collectors.toList());
+        List<DepartmentEntity> departmentEntities=departmentRepository.findAll();
+        return departmentEntities.stream()
+                .map(departmentEntity -> modalMapper.map(departmentEntity, DepartmentDTO.class))
+                .collect(Collectors.toList());
     }
 
-
-    public DepartmentDTO createNewDepartment(DepartmentDTO inputDepartment) {
-        DepartmentEntity toSaveEntity=modelMapper.map(inputDepartment,DepartmentEntity.class); //convert dto to entity
-        DepartmentEntity savedDepartmentEntity=departmentRepository.save(toSaveEntity); //then save entity
-        return modelMapper.map(savedDepartmentEntity,DepartmentDTO.class); //convert entity to dto
+    //Create New Department
+    public DepartmentDTO createDepartment(DepartmentDTO departmentDTO) {
+        DepartmentEntity toSaveEntity=modalMapper.map(departmentDTO,DepartmentEntity.class);
+        DepartmentEntity savedEntity=departmentRepository.save(toSaveEntity);
+        return modalMapper.map(savedEntity,DepartmentDTO.class);
     }
 
-
-    public DepartmentDTO updateDepartmentById(Long id, DepartmentDTO departmentDTO) {
-        if(!departmentRepository.existsById(id)){
-            return null;
-        }
-        DepartmentEntity departmentEntity=modelMapper.map(departmentDTO,DepartmentEntity.class);
+    //Update Department by Id
+    public DepartmentDTO updateDepartmentById(DepartmentDTO departmentDTO,Long id) {
+        if(!departmentRepository.existsById(id)){return null;}
+        DepartmentEntity departmentEntity=modalMapper.map(departmentDTO,DepartmentEntity.class);
         departmentEntity.setId(id);
-        DepartmentEntity savedDepartmentEntity=departmentRepository.save(departmentEntity);
-        return modelMapper.map(savedDepartmentEntity,DepartmentDTO.class);
+        DepartmentEntity savedEntity=departmentRepository.save(departmentEntity);
+        return modalMapper.map(savedEntity,DepartmentDTO.class);
     }
-
-    public boolean deleteDepartmentById(Long id) {
-        if(!departmentRepository.existsById(id)){
-            return false;
+    //Delete Department by Id
+    public String deleteDepartmentById(Long id) {
+        if(!departmentRepository.existsById(id))
+        {
+            return "Id not exist";
         }
         departmentRepository.deleteById(id);
-        return true;
+        return "Deleted";
     }
+
 }
