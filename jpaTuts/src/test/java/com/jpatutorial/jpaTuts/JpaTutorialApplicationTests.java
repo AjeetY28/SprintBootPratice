@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 class JpaTutorialApplicationTests {
@@ -37,8 +38,15 @@ class JpaTutorialApplicationTests {
 //		List<ProductEntity> entities = productRepository.findByCreatedAtAfter(
 //				LocalDate.of(2025,1,1));
 //		List<ProductEntity> entities=productRepository.findByQuantityGreaterThanAndPriceLessThan(3,BigDecimal.valueOf(25.45));
-		List<ProductEntity> entities=productRepository.findByTitleLike("%Choco%");
+		List<ProductEntity> entities=productRepository.findByTitleLikeIgnoreCase("%choco%");
 		System.out.println(entities);
+	}
+
+	@Test
+	void getSingleForRepository(){
+		Optional<ProductEntity> entity=productRepository.findByTitleAndPrice("Pepsi",BigDecimal.valueOf(14.4));
+		entity.ifPresent(System.out::println);
+
 	}
 
 }
