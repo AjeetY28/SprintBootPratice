@@ -15,18 +15,18 @@ class JpaTutorialApplicationTests {
 	@Autowired
 	ProductRepository productRepository;
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
 	@Test
 	void testRepository()
 	{
 		ProductEntity productEntity = ProductEntity.builder()
-				.sku("nestle123")
+				.sku("nestle23")
 				.title("Nestle Chocolate")
-				.price(BigDecimal.valueOf(100.24))
-				.quantity(12)
+				.price(BigDecimal.valueOf(23.45))
+				.quantity(4)
 				.build();
 		ProductEntity savedProductEntity =productRepository.save(productEntity);
 		System.out.println(savedProductEntity);
@@ -34,7 +34,10 @@ class JpaTutorialApplicationTests {
 
 	@Test
 	void getRepository(){
-		List<ProductEntity> entities = productRepository.findByTitle("Pepsi");
+//		List<ProductEntity> entities = productRepository.findByCreatedAtAfter(
+//				LocalDate.of(2025,1,1));
+//		List<ProductEntity> entities=productRepository.findByQuantityGreaterThanAndPriceLessThan(3,BigDecimal.valueOf(25.45));
+		List<ProductEntity> entities=productRepository.findByTitleLike("%Choco%");
 		System.out.println(entities);
 	}
 
