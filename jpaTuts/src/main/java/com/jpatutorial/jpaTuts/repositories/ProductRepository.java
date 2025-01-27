@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
 
-    List<ProductEntity> findByTitle(String title);
+    List<ProductEntity> findAllByOrderByPrice();
 
     List<ProductEntity> findByCreatedAtAfter(LocalDate after);
 
