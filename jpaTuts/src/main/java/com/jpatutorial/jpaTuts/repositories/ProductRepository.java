@@ -1,6 +1,7 @@
 package com.jpatutorial.jpaTuts.repositories;
 
 import com.jpatutorial.jpaTuts.entities.ProductEntity;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,9 +14,9 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
 
-    List<ProductEntity> findAllByOrderByPrice();
+     List<ProductEntity> findBy(Sort sort);
 
-    List<ProductEntity> findByCreatedAtAfterOrderByPrice(LocalDate after);
+    List<ProductEntity> findByCreatedAtAfterOrderByTitle(LocalDate after);
 
     List<ProductEntity> findByQuantityGreaterThanAndPriceLessThan(int quantity, BigDecimal price);
 

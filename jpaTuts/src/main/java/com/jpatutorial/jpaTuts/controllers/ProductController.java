@@ -3,11 +3,14 @@ package com.jpatutorial.jpaTuts.controllers;
 
 import com.jpatutorial.jpaTuts.entities.ProductEntity;
 import com.jpatutorial.jpaTuts.repositories.ProductRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path= "/products")
@@ -20,7 +23,11 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductEntity> getAllProducts() {
-        return productRepository.findAllByOrderByPrice();
+    public List<ProductEntity> getAllProducts(@RequestParam(defaultValue = "id") String sortBy) {
+//        return productRepository.findBy(Sort.by(Sort.Direction.DESC ,sortBy,"price"));
+        return productRepository.findBy(Sort.by(
+                Sort.Order.desc(sortBy),
+                Sort.Order.asc("title")
+        ));
     }
 }
