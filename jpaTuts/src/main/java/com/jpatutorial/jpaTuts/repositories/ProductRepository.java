@@ -15,7 +15,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
 
     List<ProductEntity> findAllByOrderByPrice();
 
-    List<ProductEntity> findByCreatedAtAfter(LocalDate after);
+    List<ProductEntity> findByCreatedAtAfterOrderByPrice(LocalDate after);
 
     List<ProductEntity> findByQuantityGreaterThanAndPriceLessThan(int quantity, BigDecimal price);
 
