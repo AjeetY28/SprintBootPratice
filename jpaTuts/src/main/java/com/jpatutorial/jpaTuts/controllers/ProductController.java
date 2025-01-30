@@ -28,15 +28,22 @@ public class ProductController {
 
     @GetMapping
     public List<ProductEntity> getAllProducts(
+            @RequestParam(defaultValue = "")String title,
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "0")Integer pageNumber) {
+
+
+            return productRepository.findByTitleContainingIgnoreCase(
+                    title,
+                    PageRequest.of(pageNumber,PAGE_SIZE,Sort.by(sortBy))
+            );
 //        return productRepository.findBy(Sort.by(Sort.Direction.DESC ,sortBy,"price"));
 //        return productRepository.findBy(Sort.by(
 //                Sort.Order.desc(sortBy),
 //                Sort.Order.asc("title")
 //        ));
 
-        Pageable pageable= PageRequest.of(pageNumber,PAGE_SIZE,Sort.by(sortBy));
-        return productRepository.findAll(pageable).getContent();
+//        Pageable pageable= PageRequest.of(pageNumber,PAGE_SIZE,Sort.by(sortBy));
+//        return productRepository.findAll(pageable).getContent();
     }
 }

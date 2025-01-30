@@ -38,7 +38,7 @@ class JpaTutorialApplicationTests {
 //		List<ProductEntity> entities = productRepository.findByCreatedAtAfter(
 //				LocalDate.of(2025,1,1));
 //		List<ProductEntity> entities=productRepository.findByQuantityGreaterThanAndPriceLessThan(3,BigDecimal.valueOf(25.45));
-		List<ProductEntity> entities=productRepository.findByTitleLikeIgnoreCase("%choco%");
+		List<ProductEntity> entities=productRepository.findByTitleContainingIgnoreCase("%choco%",null);
 		System.out.println(entities);
 	}
 
