@@ -3,7 +3,6 @@ package com.jpatutorial.jpaTuts.controllers;
 
 import com.jpatutorial.jpaTuts.entities.ProductEntity;
 import com.jpatutorial.jpaTuts.repositories.ProductRepository;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,7 +18,7 @@ import java.util.Optional;
 @RequestMapping(path= "/products")
 public class ProductController {
 
-    private final int PAGE_SIZE=5;
+    private final int 
     private final ProductRepository productRepository;
 
     public ProductController(ProductRepository productRepository) {
@@ -27,7 +26,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public Page<ProductEntity> getAllProducts(
+    public List<ProductEntity> getAllProducts(
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "1")Integer pageNumber) {
 //        return productRepository.findBy(Sort.by(Sort.Direction.DESC ,sortBy,"price"));
@@ -36,7 +35,7 @@ public class ProductController {
 //                Sort.Order.asc("title")
 //        ));
 
-        Pageable pageable= PageRequest.of(pageNumber,PAGE_SIZE);
-        return productRepository.findAll(pageable);
+        Pageable pageable= PageRequest.of(pageNumber,)
+        return productRepository.findAll();
     }
 }
