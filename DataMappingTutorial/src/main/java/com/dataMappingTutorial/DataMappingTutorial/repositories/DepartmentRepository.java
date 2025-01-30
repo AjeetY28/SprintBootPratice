@@ -1,9 +1,9 @@
 package com.dataMappingTutorial.DataMappingTutorial.repositories;
 
-import com.dataMappingTutorial.DataMappingTutorial.entities.EmployeeEntity;
+import com.dataMappingTutorial.DataMappingTutorial.entities.DepartmentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<EmployeeEntity,Long> {
+public interface DepartmentRepository extends JpaRepository<DepartmentEntity,Long> {
 }
