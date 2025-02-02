@@ -40,4 +40,13 @@ public class DepartmentService {
                })).orElse(null);
 
     }
+
+    public DepartmentEntity getAssignedDepartmentOfManager(Long employeeId) {
+
+//        Optional<EmployeeEntity> employeeEntity=employeeRepository.findById(employeeId);
+//        return employeeEntity.map(employee->
+//            employee.getManagedDepartment()).orElse(null);
+        EmployeeEntity employeeEntity=EmployeeEntity.builder().id(employeeId).build();
+       return departmentRepository.findByManager(employeeEntity);
+    }
 }

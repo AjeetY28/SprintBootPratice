@@ -33,4 +33,9 @@ public class DepartmentController {
         return departmentService.assignManagerToDepartment(departmentId, employeeId);
     }
 
+    @GetMapping(path = "/assignedDepartmentOfManager/{employeeId}")
+    public DepartmentEntity getAssignedDepartmentOfManager(@PathVariable Long employeeId) {
+        return departmentService.getAssignedDepartmentOfManager(employeeId);
+    }
+
 }
