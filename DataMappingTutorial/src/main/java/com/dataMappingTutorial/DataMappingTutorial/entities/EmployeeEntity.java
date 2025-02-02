@@ -1,6 +1,7 @@
 package com.dataMappingTutorial.DataMappingTutorial.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,4 +20,8 @@ public class EmployeeEntity {
 
     @Column(nullable = false)
     private String name;
+
+    @OneToOne(mappedBy = "manager")
+    @JsonIgnore
+    private DepartmentEntity managedDepartment;
 }
