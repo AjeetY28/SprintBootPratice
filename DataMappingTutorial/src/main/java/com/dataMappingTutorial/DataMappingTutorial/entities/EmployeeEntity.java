@@ -3,13 +3,14 @@ package com.dataMappingTutorial.DataMappingTutorial.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.Objects;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -27,7 +28,20 @@ public class EmployeeEntity {
     @JsonIgnore
     private DepartmentEntity managedDepartment;
 
-    @ManyToOne
-    @JoinColumn(name = "worker_department_id",referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "worker_department_id")
+    @JsonIgnore
     private DepartmentEntity workerDepartment;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeeEntity that = (EmployeeEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
 }

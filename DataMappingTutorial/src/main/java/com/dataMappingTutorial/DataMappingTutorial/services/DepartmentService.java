@@ -13,8 +13,8 @@ import java.util.Optional;
 public class DepartmentService {
 
     private final DepartmentRepository departmentRepository;
-
     private final EmployeeRepository employeeRepository;
+
     public DepartmentService(DepartmentRepository departmentRepository,EmployeeRepository employeeRepository) {
         this.departmentRepository = departmentRepository;
         this.employeeRepository=employeeRepository;
@@ -51,16 +51,16 @@ public class DepartmentService {
     }
 
     public DepartmentEntity assignWorkerToDepartment(Long departmentId, Long employeeId) {
-        Optional<DepartmentEntity> departmentEntity=departmentRepository.findById(departmentId);
-        Optional<EmployeeEntity> employeeEntity=employeeRepository.findById(employeeId);
+        Optional<DepartmentEntity> departmentEntity = departmentRepository.findById(departmentId);
+        Optional<EmployeeEntity> employeeEntity = employeeRepository.findById(employeeId);
 
         return departmentEntity.flatMap(department ->
-                employeeEntity.map(employee ->{
-                   employee.setWorkerDepartment(department);
-                   employeeRepository.save(employee);
+                employeeEntity.map(employee -> {
+                    employee.setWorkerDepartment(department);
+                    employeeRepository.save(employee);
 
-                   department.getWorkers().add(employee);
-                   return department;
+                    department.getWorkers().add(employee);
+                    return department;
                 })).orElse(null);
     }
 }
