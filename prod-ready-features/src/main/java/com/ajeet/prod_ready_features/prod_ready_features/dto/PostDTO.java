@@ -1,5 +1,8 @@
 package com.ajeet.prod_ready_features.prod_ready_features.dto;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 
 @Getter
@@ -7,7 +10,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostDTO {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
     private String description;
 }

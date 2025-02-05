@@ -2,6 +2,7 @@ package com.ajeet.prod_ready_features.prod_ready_features.services;
 
 import com.ajeet.prod_ready_features.prod_ready_features.dto.PostDTO;
 import com.ajeet.prod_ready_features.prod_ready_features.entities.PostEntity;
+import com.ajeet.prod_ready_features.prod_ready_features.exceptions.ResourceNotFoundException;
 import com.ajeet.prod_ready_features.prod_ready_features.repositories.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,14 @@ public class PostServiceImpl implements PostService {
     public PostDTO createNewPost(PostDTO inputPost) {
         PostEntity postEntity = modelMapper.map(inputPost, PostEntity.class);
         postEntity = postRepository.save(postEntity);
+        return modelMapper.map(postEntity, PostDTO.class);
+    }
+
+    @Override
+    public PostDTO gePostById(Long postId) {
+        PostEntity postEntity = postRepository
+                .findById(postId)
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found with id: "+postId));
         return modelMapper.map(postEntity, PostDTO.class);
     }
 }
