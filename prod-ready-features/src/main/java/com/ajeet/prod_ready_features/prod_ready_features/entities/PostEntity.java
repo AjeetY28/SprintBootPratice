@@ -3,6 +3,8 @@ package com.ajeet.prod_ready_features.prod_ready_features.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -17,13 +19,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
+@Audited//using to hibernate envers library to track the changes, an d it will create 2 mode table through which we can track the changes
 public class PostEntity extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
+//    @NotAudited
     private String description;
 
 

@@ -64,6 +64,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-envers</artifactId>
+			<version>6.6.6.Final</version>
+
+		</dependency>
+
 	</dependencies>
 
 	<build>
