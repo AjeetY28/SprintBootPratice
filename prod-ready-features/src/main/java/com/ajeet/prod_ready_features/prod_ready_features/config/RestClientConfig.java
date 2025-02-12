@@ -14,7 +14,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class RestClientConfig {
 
 //    @Value("${employeeService.base.url}")
-    private String BASE_URL="http://localhost:8080";
+    private final String BASE_URL;
+
+    public RestClientConfig() {
+        BASE_URL = "http://localhost:8080";
+    }
 
 
     @Bean

@@ -1,10 +1,6 @@
 package com.ajeet.prod_ready_features.prod_ready_features.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -12,6 +8,7 @@ import java.time.LocalDate;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class EmployeeDTO {
 
     private Long id;

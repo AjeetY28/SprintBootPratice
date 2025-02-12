@@ -22,13 +22,46 @@ public class EmployeeClientImpl implements EmployeeClient {
     public List<EmployeeDTO> getAllEmployees() {
         try {
             ApiResponse<List<EmployeeDTO>> employeeDTOList = restClient.get()
-                    .uri("employees")
+                    .uri("employee")
                     .retrieve()
                     .body(new ParameterizedTypeReference<>() {
                     });
 
+//            assert employeeDTOList != null;
             return employeeDTOList.getData();
-        }catch (Exception e){
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public EmployeeDTO getEmployeeById(Long employeeId) {
+        try {
+            ApiResponse<EmployeeDTO> employeeResponse = restClient.get()
+                    .uri("employee/{employeeId}", employeeId)
+                    .retrieve()
+                    .body(new ParameterizedTypeReference<>() {
+                    });
+
+            return employeeResponse.getData();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public EmployeeDTO createNewEmployee(EmployeeDTO employeeDTO) {
+        try {
+            ApiResponse<EmployeeDTO> employeeDTOApiResponse=restClient.post()
+                    .uri("employee")
+                    .body(employeeDTO)
+                    .retrieve()
+                    .body(new ParameterizedTypeReference<>() {
+                    });
+            return employeeDTOApiResponse.getData();
+
+        }catch (Exception e)
+        {
             throw new RuntimeException(e);
         }
     }

@@ -2,9 +2,13 @@ package com.ajeet.prod_ready_features.prod_ready_features.advice;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Data
 public class ApiResponse<T>{
 
