@@ -3,8 +3,12 @@ package com.ajeet.prod_ready_features.prod_ready_features.clients.impl;
 import com.ajeet.prod_ready_features.prod_ready_features.advice.ApiResponse;
 import com.ajeet.prod_ready_features.prod_ready_features.clients.EmployeeClient;
 import com.ajeet.prod_ready_features.prod_ready_features.dto.EmployeeDTO;
+import com.ajeet.prod_ready_features.prod_ready_features.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -52,13 +56,18 @@ public class EmployeeClientImpl implements EmployeeClient {
     @Override
     public EmployeeDTO createNewEmployee(EmployeeDTO employeeDTO) {
         try {
-            ApiResponse<EmployeeDTO> employeeDTOApiResponse=restClient.post()
+            ResponseEntity<ApiResponse<EmployeeDTO> employeeDTOApiResponse=restClient.post()
                     .uri("employee")
                     .body(employeeDTO)
                     .retrieve()
-                    .body(new ParameterizedTypeReference<>() {
+                    .onStatus(HttpStatusCode::is4xxClientError,(req,res)->{
+                        System.out.println("Error occured: "+new String(res.getBody().readAllBytes()));
+                        throw new ResourceNotFoundException("could not create the employee");
+                    })
+                    .toEntity(new ParameterizedTypeReference<>() {
                     });
-            return employeeDTOApiResponse.getData();
+
+            return employeeDTOApiResponse.getBody().getData();
 
         }catch (Exception e)
         {

@@ -33,7 +33,7 @@ class ProdReadyFeaturesApplicationTests {
 	@Order(1)
 	void createNewEmployee()
 	{
-		EmployeeDTO employeeDTO=new EmployeeDTO(null,"Ajeet","ajeet@gmail.com",20
+		EmployeeDTO employeeDTO=new EmployeeDTO(null,"Ajeet","ajeet@gmail.com",2
 				,"USER",5000.00
 				, LocalDate.of(2024,12,12)
 				,true);
