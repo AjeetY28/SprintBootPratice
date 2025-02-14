@@ -27,7 +27,7 @@ class ProdReadyFeaturesApplicationTests {
 	@Order(2)
 	void getEmployeeById()
 	{
-		EmployeeDTO employeeDTO=employeeClient.getEmployeeById(1L);
+		EmployeeDTO employeeDTO=employeeClient.getEmployeeById(100L);
 	}
 	@Test
 	@Order(1)
