@@ -1,8 +1,8 @@
 <configuration>
     <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %c{1} - %msg%n"/>
 
-    <property name="LOG_PATH" value="logs"/>
-
+<!--    <property name="LOG_PATH" value="logs"/>-->
+    <property name="LOG_PATH" value="${LOG_PATH:-logs}" />
     <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
