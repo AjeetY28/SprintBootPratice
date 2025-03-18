@@ -6,3 +6,9 @@ spring:
           google:
             client-id: 52719056470-3i9e7sbcprnqifguq3anarlkvj6q2s6e.apps.googleusercontent.com
             client-secret: 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
+          github:
+            client-id: hjhajkdhkjsd-DEMO
+            client-secret: hjhasjdhjka-DEMO
+          facebook:
+            client-id: bjahskjdhjkashdkjasd-DEMO
+            client-secret: ajdhkjashdkjash-DEMO
