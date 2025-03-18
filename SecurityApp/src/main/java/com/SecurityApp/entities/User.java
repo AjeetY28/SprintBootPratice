@@ -17,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class User implements UserDetails {
 
     @Id

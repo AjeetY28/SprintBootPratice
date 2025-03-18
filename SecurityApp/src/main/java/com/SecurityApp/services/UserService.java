@@ -38,6 +38,9 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User with if "+id+"not found"));
     }
 
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
     public UserDto signUp(SignUpDto signUpDto) {
         Optional<User> user=userRepository.findByEmail(signUpDto.getEmail());
 
@@ -54,4 +57,7 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public User save(User newUser) {
+        return userRepository.save(newUser);
+    }
 }
